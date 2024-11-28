@@ -170,23 +170,25 @@ with open("Collected_dat.csv", "w") as data:
         dht_hum_id = 178
         bmp_temp_id = 179
         bmp_pres_id = 181
+        try:
+            data = {'sensor_id': dht_temp_id, 'value': f'{dht_temp:2f}'}
+            r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
+            print(r.json())
 
-        data = {'sensor_id': dht_temp_id, 'value': f'{dht_temp:2f}'}
-        r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
-        print(r.json())
+            data = {'sensor_id': dht_hum_id, 'value': f'{dht_hum:2f}'}
+            r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
+            print(r.json())
 
-        data = {'sensor_id': dht_hum_id, 'value': f'{dht_hum:2f}'}
-        r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
-        print(r.json())
+            data = {'sensor_id': bmp_temp_id, 'value': f'{bmp_temp:2f}'}
+            r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
+            print(r.json())
 
-        data = {'sensor_id': bmp_temp_id, 'value': f'{bmp_temp:2f}'}
-        r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
-        print(r.json())
-
-        data = {'sensor_id': bmp_pres_id, 'value': f'{bmp_pres:2f}'}
-        r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
-        print(r.json())
-        time.sleep(60)
+            data = {'sensor_id': bmp_pres_id, 'value': f'{bmp_pres:2f}'}
+            r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
+            print(r.json())
+            time.sleep(60)
+        finally:
+            time.sleep(60)
 
         #if dht_temp is not None and dht_hum is not None:
             #log_data(data, dht_temp, dht_hum, bmp_temp, bmp_pres)
@@ -196,5 +198,4 @@ with open("Collected_dat.csv", "w") as data:
 
 arduino_serial.close()
 print("Collection is complete Master, TIME IS UP!")
-
 ```

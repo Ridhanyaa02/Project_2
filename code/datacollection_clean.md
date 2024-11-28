@@ -10,6 +10,7 @@ server_ip = '192.168.4.137'
 user = {'username':'shorn&ridi', 'password':'I_told_you_so'}
 r = requests.post(f'http://{server_ip}/login',json=user)
 access_token = r.json()['access_token']
+print(access_token)
 auth = {"Authorization":f"Bearer {access_token}"}
 
 #End of API----------------------------------------------------------------------------------------------

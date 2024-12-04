@@ -4,6 +4,7 @@ import time
 from datetime import datetime, timedelta
 Bold_red = "\33[1;31m"
 end_code = "\033[00m"
+failure_count = 0
 #Server api-----------------------------------------------------------------------------------
 
 import requests
@@ -15,32 +16,32 @@ print(access_token)
 auth = {"Authorization":f"Bearer {access_token}"}
 
 new_dht_temp_sensor = {"type": 'Temperature',
-              'location': 'SHORNs house',
-              'name': 'DHT temp sensor1',
+              'location': 'RIDI house',
+              'name': 'DHT temp sensor1.2',
               'unit': 'C'}
 #comment out after first run
 #r =  requests.post(f'http://{server_ip}/sensor/new', json=new_dht_temp_sensor, headers=auth)
 #print(r.json())
 
 new_dht_hum_sensor = {"type": 'Humidity',
-              'location': 'SHORNs house',
-              'name': 'DHT hum sensor2',
+              'location': 'RIDI house',
+              'name': 'DHT hum sensor2.2',
               'unit': '%'}
 #comment out after first run
 #r =  requests.post(f'http://{server_ip}/sensor/new', json=new_dht_hum_sensor, headers=auth)
 #print(r.json())
 
 new_bmp_temp_sensor = {"type": 'Temperature',
-              'location': 'SHORNs house',
-              'name': 'BMP temp sensor3',
+              'location': 'RIDI house',
+              'name': 'BMP temp sensor3.2',
               'unit': 'C'}
 #comment out
 #r =  requests.post(f'http://{server_ip}/sensor/new', json=new_bmp_temp_sensor, headers=auth)
 #print(r.json())
 
 new_bmp_pres_sensor = {"type": 'Pressure',
-              'location': 'SHORNs house',
-              'name': 'BMP press sensor4',
+              'location': 'RIDI house',
+              'name': 'BMP press sensor4.2',
               'unit': 'hpa'}
 #comment out after first run
 #r =  requests.post(f'http://{server_ip}/sensor/new', json=new_bmp_pres_sensor, headers=auth)
@@ -78,7 +79,7 @@ def check_connection(host=server_ip, port=80, timeout=3):
 #MAIN---------------------------------------------------------------------------------------------------
 
 #switch to colleted data 2 after the first run
-with open("Collected_dat.csv", "w") as data_file:
+with open("Collected _dat2.csv", "w") as data_file:
     #header
     data_file.write("Timestamp, DHT11 Temp (°C), DHT11 Humidity (%), BMP280 Temp (°C), BMP280 Pressure (hPa)\n")
     #collecting data and printing for monitoring
@@ -103,15 +104,18 @@ with open("Collected_dat.csv", "w") as data_file:
             print("Where is my data?")
 
 #Server Upload--------------------------------------------------------------------------------------------------
-        dht_temp_id = 2211
-        dht_hum_id = 2212
-        bmp_temp_id = 2213
-        bmp_pres_id = 2214
+        dht_temp_id =245
+        dht_hum_id =246
+        bmp_temp_id =247
+        bmp_pres_id =248
 
         import socket
 
         if check_connection():
             try:
+                r = requests.post(f'http://{server_ip}/login', json=user)
+                access_token = r.json()['access_token']
+                auth = {"Authorization": f"Bearer {access_token}"}
                 data = {'sensor_id': dht_temp_id, 'value': f'{dht_temp:2f}'}
                 r = requests.post(f'http://{server_ip}/reading/new', json=data, headers=auth)
                 print(r.json())
@@ -129,7 +133,9 @@ with open("Collected_dat.csv", "w") as data_file:
                 print(r.json())
             except Exception as e:
                 print(f'{Bold_red}Connection ERROR{end_code}')
-            time.sleep(10)
+                failure_count = failure_count + 1
+                print(f'Failure #{failure_count}')
+            time.sleep(60)
         else:
             try:
                 r = requests.post(f'http://{server_ip}/login', json=user)
@@ -153,11 +159,16 @@ with open("Collected_dat.csv", "w") as data_file:
             except Exception as e:
                 print(f'{Bold_red}Connection ERROR{end_code}')
                 print("No server connection saving locally")
-            time.sleep(10)
+                failure_count = failure_count + 1
+                print(f'Failure #{failure_count}')
+            time.sleep(60)
     else:
         print("No server connection saving locally")
-        time.sleep(10)
+        time.sleep(60)
 
 arduino_serial.close()
 print("Collection is complete Master, TIME IS UP!")
+print(f'The upload failed {failure_count} times')
+if failure_count > 0:
+    print('You should do something about that.')
 ```

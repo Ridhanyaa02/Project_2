@@ -60,7 +60,7 @@ arduino_serial = serial.Serial(port, arduino_baud_rate, timeout=serial_timeout)
 time.sleep(2)
 print ('Connection Successful')
 
-end_time = datetime.now() + timedelta(hours=24)
+end_time = datetime.now() + timedelta(minutes=623)
 
 #FUNCTIONS----------------------------------------------------------------------------------------------
 

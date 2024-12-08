@@ -19,11 +19,19 @@
 | 4          | Handle server disconnection                | Server is unavailable     | Data is saved locally, failure count increments | 3 days         | Dec 5th        |
 
 ## Systems Diagram:
+<img width="817" alt="Screenshot 2024-12-09 at 0 41 53 AM" src="https://github.com/user-attachments/assets/83c1f726-e108-4a97-9104-48bd5974d1dd">
 
 ## Flow Diagrams:
+### Server Log In: 
+<img width="421" alt="Screenshot 2024-12-09 at 0 53 50 AM" src="https://github.com/user-attachments/assets/ed507c23-655a-4018-a384-249b4234f5b0">
+
+### Sensor Data Processing:
+<img width="590" alt="Screenshot 2024-12-09 at 1 01 45 AM" src="https://github.com/user-attachments/assets/f20b310e-5a1c-4c9f-a1cf-f234c6b18c5d">
+
+### Data Upload to Server: 
+<img width="584" alt="Screenshot 2024-12-09 at 1 04 23 AM" src="https://github.com/user-attachments/assets/b72fa5f5-6101-4d1b-9d9f-b57df1041309">
 
 ## Data Storage Examples:
-
 ### CSV File Format:
 ```.py
 Timestamp, DHT11 Temp (°C), DHT11 Humidity (%), BMP280 Temp (°C), BMP280 Pressure (hPa)
@@ -36,7 +44,7 @@ JSON Example for Server Upload:
   "value": "22.34"
 }
 
-## Clear Development Process
+## Development Process:
 
 ### Purpose:
 The project collects environmental data (temperature, humidity, and pressure) using sensors, logs it locally, and uploads it to a server for analysis.

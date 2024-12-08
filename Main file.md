@@ -32,13 +32,13 @@
 <img width="584" alt="Screenshot 2024-12-09 at 1 04 23 AM" src="https://github.com/user-attachments/assets/b72fa5f5-6101-4d1b-9d9f-b57df1041309">
 
 ## Data Storage Examples:
-### CSV File Format:
+
+#### CSV File Format:
 ```.py
 Timestamp, DHT11 Temp (°C), DHT11 Humidity (%), BMP280 Temp (°C), BMP280 Pressure (hPa)
 2024-12-08 15:23:45, 22.34, 45.67, 21.78, 1013.25
-JSON Example for Server Upload:
 ```
-### Json:
+#### JSON Example for Server Upload::
 {
   "sensor_id": 245,
   "value": "22.34"
@@ -98,3 +98,23 @@ Ensures that resources aren't wasted attempting uploads when the server is down.
 Python's extensive libraries and ease of integration with Arduino make it ideal for this application.
 
 ## Sources: 
+### DHT:
+https://www.circuitbasics.com/how-to-set-up-the-dht11-humidity-sensor-on-an-arduino/
+### BME:
+https://iotdesignpro.com/projects/interfacing-bmp280-with-arduino-to-read-pressure-temperature-and-altitude
+### Socket:
+https://docs.python.org/3/library/socket.html
+### DATE TIME:
+https://docs.python.org/3/library/datetime.html
+### PY serial:
+https://pyserial.readthedocs.io/en/latest/
+### Error Handling:
+https://docs.python.org/3/tutorial/errors.html
+### Arduino - Python Serial
+https://projecthub.arduino.cc/ansh2919/serial-communication-between-python-and-arduino-663756
+### Extra:
+Past programs done throughout unit 2
+
+# Criterion D: Functionality
+## Scientific poster showing findings:
+![Beige and White Contemporary Editorial Landscape University Research Poster](https://github.com/user-attachments/assets/24bccb03-e4a8-4890-8832-fbbbdad680d6)

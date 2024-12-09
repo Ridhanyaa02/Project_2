@@ -118,3 +118,5 @@ Past programs done throughout unit 2
 # Criterion D: Functionality
 ## Scientific poster showing findings:
 ![Beige and White Contemporary Editorial Landscape University Research Poster](https://github.com/user-attachments/assets/24bccb03-e4a8-4890-8832-fbbbdad680d6)
+## Video oveview of Project:
+Attatched Separately
